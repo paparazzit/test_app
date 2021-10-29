@@ -7,11 +7,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 // loginUser($name, $password);
 loginUser($email, $password);
-// echo $user;
+
    
 }
 else{
-    echo 'NEMAS OVLASCENJE ZA OVU STRANICU';
+    echo json_encode('NEMAS OVLASCENJE ZA OVU STRANICU');
     
 }
 

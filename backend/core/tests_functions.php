@@ -55,6 +55,7 @@ function updateTest($testId, $testName, $testSbj){
    return true;
    
 }
+
 function insertQuestion($testId, $question, $answer_a, $answer_b, $points, $authorId){
    
     global $pdo;
@@ -73,6 +74,39 @@ function getQuestionList($testId){
   
     
     return $questions;
+}
+function getSingleQuestion($id){
+    global $pdo;
+    $stmt = $pdo -> prepare("SELECT * FROM questions WHERE id = ?");
+    $stmt->execute([$id]);
+    $question = $stmt->fetch();  
+    return $question;
+}
+function updateQuestion( $question, $answer_a, $answer_b, $points,  $id){
+    global $pdo;
+    $stmt = $pdo ->prepare("UPDATE questions SET question = ?, answer_a = ?, answer_b = ?, points =?  WHERE id = ?");
+   $stmt ->execute([ $question, $answer_a, $answer_b, $points, $id]);
+    
+   return true;
+}
+function testPoints($testId){
+    global $pdo;
+    $stmt = $pdo ->prepare("SELECT points FROM questions WHERE testId =?");
+    $stmt ->execute([$testId]);
+    $allQuestions = $stmt->fetchAll();
+    $totalPoint= 0;
+    for($i=0; $i<count($allQuestions); $i++){
+        $totalPoint += $allQuestions[$i]->points;
+    }
+
+    return $totalPoint;
+}
+function updateTotalPoints($totalPoints, $id){
+    global $pdo;
+    $stmt = $pdo ->prepare("UPDATE tests SET  totalPoints= ? WHERE id = ?");
+    $stmt ->execute([$totalPoints, $id]);
+    
+    return true;
 }
 
 ?>

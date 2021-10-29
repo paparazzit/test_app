@@ -116,3 +116,10 @@ button.success {
 #profList li:hover {
 	background-color: rgb(189, 255, 255);
 }
+
+.questionBtn {
+	cursor: pointer;
+}
+.questionBtn:hover {
+	background-color: rgba(0, 255, 255, 0.164);
+}

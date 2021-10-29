@@ -77,18 +77,28 @@ function FormValidator(formName, inputs, checkPassword) {
 
 // PROMISES
 
+// MISLIM DA SE PROBLEM NALAZI OVDE KOD POGRESNOG HANDLOVANJA ERRORA odnosno rejecta
 class DB {
 	static getAll(method, url, sendData) {
 		let data = new Promise(function (resolve, reject) {
 			let xml = new XMLHttpRequest();
 			xml.open(method, url);
-			xml.onreadystatechange = function () {
-				if (xml.readyState === 4) {
-					if (xml.status === 200) {
-						resolve(JSON.parse(xml.responseText));
-					} else {
-						reject("NEKI ERROR");
-					}
+			// xml.onreadystatechange = function () {
+			// 	if (xml.readyState === 4) {
+			// 		if (xml.status === 200) {
+			// 			resolve(JSON.parse(xml.responseText));
+			// 		} else {
+			// 			reject("NEKI ERROR");
+			// 		}
+			// 	}
+			// };
+			xml.onload = function () {
+				// console.log("ready: ", xml.readyState);
+				if (xml.status === 200) {
+					// console.log("ready: ", xml.readyState);
+					resolve(JSON.parse(xml.responseText));
+				} else {
+					reject("NEKI ERROR");
 				}
 			};
 			xml.send(sendData);
@@ -100,15 +110,25 @@ class DB {
 		let data = new Promise(function (resolve, reject) {
 			let xml = new XMLHttpRequest();
 			xml.open(method, url);
-			xml.onreadystatechange = function () {
-				if (xml.readyState === 4) {
-					if (xml.status === 200) {
-						resolve(xml.responseText);
-					} else {
-						reject("NEKI ERROR");
-					}
+			// xml.onreadystatechange = function () {
+			// 	if (xml.readyState === 4) {
+			// 		if (xml.status === 200) {
+			// 			resolve(xml.responseText);
+			// 		} else {
+			// 			reject("NEKI ERROR");
+			// 		}
+			// 	}
+			// };
+			// console.log("ready: ", xml.readyState);
+			xml.onload = function () {
+				if (xml.status === 200) {
+					// console.log("ready: ", xml.readyState);
+					resolve(xml.responseText);
+				} else {
+					reject("NEKI ERROR");
 				}
 			};
+
 			xml.send(sendData);
 		});
 		return data;

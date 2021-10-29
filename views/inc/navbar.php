@@ -21,7 +21,7 @@
         <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         <?php if(isLogged()) : ?>
           <a class="nav-link" href="logout.php">LogOut</a>
-          <a class="nav-link" href="#">Tests</a>
+          <a class="nav-link" href="tests.php">Tests</a>
           <?php if(getUserBySession()->role === 'admin') :?>
             <a class="nav-link" href="allUsers.php">Users</a>
             <?php endif?>

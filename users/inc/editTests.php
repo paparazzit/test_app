@@ -5,6 +5,7 @@
                         <th >Test subject</th>
                         <th >Test Author</th>
                         <th >Edit test</th>
+                        <th>Delete Test</th>
                     </tr>
                 </thead>
                 <tbody id="editTestBody">

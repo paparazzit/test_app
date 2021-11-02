@@ -73,14 +73,27 @@ function createTestTable(tests) {
 		<td>${test.testName}</td>
 		<td>${test.testSbj}</td>
 		<td>${test.authorName}</td>
-		<td><button class = "btn btn-warning" data-id="${test.id}">take a test</td>
+		<td><button class = "btn btn-warning takeIt" data-id="${test.id}">take a test</td>
 		
 
 		</tr>
 		`.trim();
 	});
 	allTestTable.innerHTML = text;
+	let testBtn = document.querySelectorAll(".takeIt");
+	if (testBtn) {
+		testBtn.forEach((btn) => {
+			btn.addEventListener("click", testShoreCut);
+		});
+	}
 }
+
+function testShoreCut(e) {
+	let currentTest = e.target.getAttribute("data-id");
+	console.log(e.target.getAttribute("data-id"));
+	window.location.href = `takeATest.php?id=${currentTest}`;
+}
+
 function createEditTestsTable(tests) {
 	let text = "";
 	tests.forEach((test) => {
@@ -90,10 +103,30 @@ function createEditTestsTable(tests) {
 		<td>${test.testSbj}</td>
 		<td>${test.authorName}</td>
 		<td><a href="editMyTest.php?id=${test.id}" class="btn btn-info editTestBtn" >Edit test</a></td>
+		<td><button data-id="${test.id}" class = "btn btn-danger deleteTest" >delete</button></td>
 		</tr>
+		</tr>
+		
 		`.trim();
 	});
 	editTestTable.innerHTML = text;
+
+	let deleteTest = document.querySelectorAll(".deleteTest");
+
+	deleteTest.forEach((deleteBtn) => {
+		deleteBtn.addEventListener("click", deleteSingleTest);
+	});
+}
+
+function deleteSingleTest(e) {
+	// console.log(this.getAttribute("data-id"));
+	let confirmDelete = confirm(`You are about to delete Test`);
+	if (confirmDelete) {
+		let id = this.getAttribute("data-id");
+		let sendData = new FormData();
+		sendData.append("id", id);
+		deleteSingleTestRequest(sendData);
+	}
 }
 
 let createNewTestBtn = document.querySelector("#createNewTestBtn");
@@ -135,6 +168,18 @@ function testRequest(sendData) {
 
 				let editLatTestBtn = document.querySelector(".editLastTestBtn");
 				editLatTestBtn.addEventListener("click", showLastTest);
+			}
+		})
+		.catch(function (reject) {
+			console.log(reject);
+		});
+}
+
+function deleteSingleTestRequest(sendData) {
+	DB.getAll("POST", "backend/deleteSingleTest.php", sendData)
+		.then(function (response) {
+			if (response.trim() === "ok") {
+				location.reload();
 			}
 		})
 		.catch(function (reject) {

@@ -76,6 +76,20 @@ function getQuestionList($testId){
     return $questions;
 }
 
+function deleteTest($id){
+    global $pdo;
+    $stmt = $pdo -> prepare("DELETE FROM tests WHERE id = ?");
+    $stmt->execute([$id]);
+
+    return true;
+}
+function  deleteTestQuestions($id){
+    global $pdo;
+    $stmt = $pdo -> prepare("DELETE FROM questions WHERE testId = ?");
+    $stmt->execute([$id]);
+    return 'ok';
+}
+
 function getNextQuestion($testId,$qNo, $start){
     global $pdo;
     

@@ -6,7 +6,9 @@ require 'inc/navbar.php';
     <div class="container">
         <div class="row mt-5">
             <div class="col-3 " id="profesori">
+                <h3>Profesori</h3>
                 <?php require 'views/professours.view.php';?>
+                
             </div>
             <div class="col-7 offset-2"  >
                 <h3>Testovi</h3>

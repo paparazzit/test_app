@@ -105,6 +105,7 @@ if (createNewTestBtn) {
 		false
 	);
 	function createTestForm(e) {
+		e.preventDefault();
 		testForm.checkForm();
 		if (Object.keys(testForm.formData).length > 0) {
 			let sendData = new FormData();
@@ -246,16 +247,21 @@ if (nextQBtn) {
 			sendData.append("answer_a", test.answer_a);
 			sendData.append("answer_b", test.answer_b);
 			sendData.append("points", test.points);
-			insertQuestion(sendData);
+			insertQuestion(sendData, true);
 		}
 	}
 
-	function insertQuestion(sendData) {
+	function insertQuestion(sendData, finish) {
 		DB.getRaw("POST", "backend/insertQuestions.php", sendData)
 			.then(function (response) {
-				if (response === "ok") {
+				if (response.trim() === "ok") {
 					addQuestionForm.clearForm();
-					location.reload();
+					if (!finish) {
+						location.reload();
+					} else {
+						window.location.href = `index.php`;
+					}
+					// console.log(response);
 				}
 			})
 			.catch(function (reject) {
@@ -316,7 +322,7 @@ function editQuestionForm(response) {
 function updateQuestion(sendData) {
 	DB.getAll("POST", "backend/updateQuestion.php", sendData)
 		.then(function (response) {
-			if (response === "ok") {
+			if (response.trim() === "ok") {
 				location.reload();
 			} else {
 				console.log("imamo gresku");

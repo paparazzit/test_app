@@ -38,7 +38,7 @@ function createTest($authorId, $authorName, $testName, $testSbj){
     if($tests >0){
         return false;
     }else{
-        global $pdo;
+    global $pdo;
     $stmt= $pdo->prepare("INSERT INTO tests (authorId, authorName, testName, testSbj) 
     VALUES(?, ?, ?, ?)");
     $stmt ->execute([$authorId, $authorName, $testName, $testSbj]);
@@ -75,6 +75,23 @@ function getQuestionList($testId){
     
     return $questions;
 }
+
+function getNextQuestion($testId,$qNo, $start){
+    global $pdo;
+    
+    
+    $stmt = $pdo -> prepare("SELECT * FROM questions WHERE testId = ? LIMIT ". $start . ", ". $qNo);
+    $stmt->execute([$testId]);
+    $questions = $stmt->fetch();
+    return $questions;
+}
+function getQuestionCount($testId){
+    global $pdo;
+    $stmt = $pdo -> prepare("SELECT * FROM questions WHERE testId = ?");
+    $stmt->execute([$testId]);
+    $questions = $stmt->rowCount();
+    return $questions;
+}
 function getSingleQuestion($id){
     global $pdo;
     $stmt = $pdo -> prepare("SELECT * FROM questions WHERE id = ?");
@@ -108,5 +125,7 @@ function updateTotalPoints($totalPoints, $id){
     
     return true;
 }
+
+
 
 ?>

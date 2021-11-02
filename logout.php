@@ -1,6 +1,7 @@
 <?php 
-require 'backend/core/init.php';
-
+ob_start();
+require "backend/core/init.php";
 session_destroy();
-header('Location: index.php');
+header("location:index.php");
+ob_end_flush();
 ?>

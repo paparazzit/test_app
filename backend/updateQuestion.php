@@ -5,6 +5,7 @@ require 'core/init.php';
 
 if($_SERVER['REQUEST_METHOD'] === "POST"){
     $id = filter_var($_POST['id'], FILTER_SANITIZE_STRING);
+    // $question = $_POST['question'];
     $question = filter_var($_POST['question'], FILTER_SANITIZE_STRING);
     $answer_a = filter_var($_POST['answer_a'], FILTER_SANITIZE_STRING);
     $answer_b = filter_var($_POST['answer_b'], FILTER_SANITIZE_STRING);

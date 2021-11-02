@@ -46,11 +46,12 @@ function registerUser(sendData) {
 	DB.getRaw("POST", "backend/registerUser.php", sendData)
 		.then(function (resolve) {
 			regNotification.innerText = "";
-			if (resolve === "success") {
+			if (resolve.trim() === "success") {
 				console.log(resolve);
 				regNotification.innerHTML = `<p> Uspeli ste da se registujete. Sada treba da se ulogujete na <a href="login.php">Login stranici</a>`;
 			} else {
 				regNotification.innerHTML = `Registracija nije uspela: ${resolve}`;
+				console.log("nije uspelo");
 			}
 		})
 		.catch(function (reject) {
@@ -61,7 +62,6 @@ function registerUser(sendData) {
 			console.log(reject, "Neuspesno");
 		});
 }
-
 
 // PROBELM MISLIM DA SE PROBELM NALAZI OVDE U POGRESNOM HANDLOVANJU ERRORA
 function loginUser(sendData) {
@@ -89,6 +89,7 @@ if (deleteUserBtns) {
 }
 
 function deleteUser(e) {
+	e.preventDefault();
 	let deleteConf = confirm("Are you shure you want to delete user");
 
 	if (deleteConf) {
@@ -96,7 +97,7 @@ function deleteUser(e) {
 		sendData.append("id", this.id);
 		DB.getRaw("POST", "backend/deleteUser.php", sendData)
 			.then(function (resolve) {
-				if (resolve === "ok") {
+				if (resolve.trim() === "ok") {
 					window.location.href = "allUsers.php";
 				}
 			})

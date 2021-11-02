@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2021 at 06:26 PM
+-- Generation Time: Oct 31, 2021 at 04:53 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -43,12 +43,17 @@ CREATE TABLE `questions` (
 
 INSERT INTO `questions` (`id`, `testId`, `authorId`, `question`, `answer_a`, `answer_b`, `points`) VALUES
 (33, 137, 41, 'koje bio Vuk K.', 'Reformator', 'reformator srpskoj jezika', 10),
-(34, 137, 41, 'koliko glasova ima Sr. jezik', '30', 'trideset', 9),
+(34, 137, 41, 'koliko glasova ima Sr. jezik', '30', 'trideset', 30),
 (35, 137, 41, 'koliko ima vokala', '6', 'sest', 25),
 (36, 138, 41, 'ko je bio njutn', 'naucnik', 'stari naucnik', 12),
 (37, 138, 41, 'ko je otkrio radiaciju', 'Porodica Kiri', 'Porodica kiri ', 55),
 (38, 139, 40, 'koliko zubaca ima testera', '33', '133', 5),
-(39, 139, 40, 'kako se zove alat za zakucavanje eksera', 'cekic', 'cekicko', 2);
+(39, 139, 40, 'kako se zove alat za zakucavanje eksera', 'cekic', 'cekicko', 2),
+(40, 140, 52, 'piutanje', 'piadsfa', 'qer', 12),
+(41, 138, 41, 'jos jedno pitanje', '2', '2', 55),
+(42, 138, 41, 'jos jedno pitanje', '2', '2', 55),
+(43, 138, 41, 'opet isto', 'opet isto', 'opet isto', 100),
+(44, 138, 41, 'opet isto', 'opet isto', 'opet isto', 100);
 
 -- --------------------------------------------------------
 
@@ -70,9 +75,11 @@ CREATE TABLE `tests` (
 --
 
 INSERT INTO `tests` (`id`, `authorId`, `authorName`, `testName`, `testSbj`, `totalPoints`) VALUES
-(137, 41, 'superAdmin', 'Srpski Jezik', 'Istorija jezika', 44),
-(138, 41, 'superAdmin', 'fizika', 'uvod u fiziku', 67),
-(139, 40, 'bosiljko', 'tehnicko', 'tehnicko vaspitanje', 7);
+(137, 41, 'superAdmin', 'Srpski Jezik', 'Istorija jezika', 65),
+(138, 41, 'superAdmin', 'fizika', 'uvod u fiziku', 377),
+(139, 40, 'bosiljko', 'tehnicko', 'tehnicko vaspitanje', 7),
+(140, 52, 'megaAdmin', 'neki test', 'neki test', 12),
+(141, 41, 'superAdmin', 'Neki Novi Test', 'proba', 0);
 
 -- --------------------------------------------------------
 
@@ -102,7 +109,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `edited_at
 (47, 'Zdravko', 'zdravko@gmail.com', '$2y$10$JicifTHF2gez3zzsikrwe.Gma./fp7nl7jX/YDpJB.RluVvEd4rLG', '2021-10-16 21:20:17', NULL, 'guest'),
 (48, 'sloba', 'sloba@gmail.com', '$2y$10$vljZB9ihvv8QU.RG8gr3HO8peqBxF4gY7rWf2wJgpeWSLM3TkuJT6', '2021-10-17 06:12:47', '2021-10-17 10:02:10', 'guest'),
 (49, 'danilo', 'danilo@gmail.com', '$2y$10$lwc3t3pg9Lurakz1ilV6i.2asklXOX5mV4oTRr7DGVBX/QSeqazpS', '2021-10-17 06:13:19', '2021-10-17 06:17:20', 'moderator'),
-(50, 'admin2', 'admin@gmail.com', '$2y$10$lr54biMvCIh.Y/KHaikQFO/89q54Bp9Iy9cbQ7rYQHe.JrCRFhAGW', '2021-10-17 10:09:52', '2021-10-17 10:12:12', 'guest');
+(50, 'admin2', 'admin@gmail.com', '$2y$10$lr54biMvCIh.Y/KHaikQFO/89q54Bp9Iy9cbQ7rYQHe.JrCRFhAGW', '2021-10-17 10:09:52', '2021-10-17 10:12:12', 'guest'),
+(52, 'megaAdmin', 'megaAdmin@gmail.com', '$2y$10$NTCvgAoXtBAKcQ.6PGCoOOAzwXBrOAjmL1wFzbRohbZAV.FCvdQyC', '2021-10-30 18:15:45', NULL, 'admin');
 
 --
 -- Indexes for dumped tables
@@ -134,19 +142,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

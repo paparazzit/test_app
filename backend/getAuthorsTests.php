@@ -1,8 +1,6 @@
 <?php 
+ob_start();
 require 'core/init.php';
-
-
-
 if($_SERVER['REQUEST_METHOD'] === "POST"){
     
     $userId = $_SESSION['userId'];
@@ -12,10 +10,10 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
     
 }else{
-    echo 'NEMATE OVLASCENJA DA BUDETE NA OVOJ STRANICI';
+    header('Location:index.php');
+    // require 'index.php';
+    
 }
-
-
-
+ob_end_flush();
 
 ?>

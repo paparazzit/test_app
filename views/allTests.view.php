@@ -7,10 +7,10 @@
             <?php echo $test['testName']?>
         </div>
         <div class="card-body">
-            ovde ide neki test
+        
         </div>
         <div class="card-footer">
-            broj poena
+        
         </div>
     </div>
 </div>

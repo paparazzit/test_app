@@ -1,5 +1,5 @@
 <?php 
-$pageTitle = "Register";
+$pageTitle = "Login";
 require 'backend/core/init.php';
 require 'views/inc/top.php';
 require 'views/inc/navbar.php';

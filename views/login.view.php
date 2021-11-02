@@ -14,7 +14,8 @@
                 
                 <div class="form-group mb-3">
                 
-                    <button id="loginBtn" class="btn btn-primary form-control">Login</button>
+                    <button id="loginBtn" class="btn btn-primary form-control">Login</button><br><br>
+                    <p class="float-end">If you don't have an account please<a href="register.php"> register</a></p>
                 </div>
                 <div class="form-gorup">
                     <p class="errorMsg" id="regNotification"></p>

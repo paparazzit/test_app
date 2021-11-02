@@ -83,24 +83,25 @@ class DB {
 		let data = new Promise(function (resolve, reject) {
 			let xml = new XMLHttpRequest();
 			xml.open(method, url);
-			// xml.onreadystatechange = function () {
-			// 	if (xml.readyState === 4) {
-			// 		if (xml.status === 200) {
-			// 			resolve(JSON.parse(xml.responseText));
-			// 		} else {
-			// 			reject("NEKI ERROR");
-			// 		}
-			// 	}
-			// };
-			xml.onload = function () {
-				// console.log("ready: ", xml.readyState);
-				if (xml.status === 200) {
-					// console.log("ready: ", xml.readyState);
-					resolve(JSON.parse(xml.responseText));
-				} else {
-					reject("NEKI ERROR");
+			xml.onreadystatechange = function () {
+				// console.log(xml);
+				if (xml.readyState === 4) {
+					if (xml.status === 200) {
+						resolve(JSON.parse(xml.responseText));
+					} else {
+						reject(xml);
+					}
 				}
 			};
+			// xml.onload = function () {
+			// 	// console.log("ready: ", xml.readyState);
+			// 	if (xml.status === 200) {
+			// 		// console.log("ready: ", xml.readyState);
+			// 		resolve(JSON.parse(xml.responseText));
+			// 	} else {
+			// 		reject("NEKI ERROR");
+			// 	}
+			// };
 			xml.send(sendData);
 		});
 		return data;
@@ -110,24 +111,25 @@ class DB {
 		let data = new Promise(function (resolve, reject) {
 			let xml = new XMLHttpRequest();
 			xml.open(method, url);
-			// xml.onreadystatechange = function () {
-			// 	if (xml.readyState === 4) {
-			// 		if (xml.status === 200) {
-			// 			resolve(xml.responseText);
-			// 		} else {
-			// 			reject("NEKI ERROR");
-			// 		}
-			// 	}
-			// };
-			// console.log("ready: ", xml.readyState);
-			xml.onload = function () {
-				if (xml.status === 200) {
-					// console.log("ready: ", xml.readyState);
-					resolve(xml.responseText);
-				} else {
-					reject("NEKI ERROR");
+			xml.onreadystatechange = function () {
+				if (xml.readyState === 4) {
+					if (xml.status === 200) {
+						// console.log(xml.responseText);
+						resolve(xml.responseText);
+					} else {
+						reject(xml);
+					}
 				}
 			};
+			// console.log("ready: ", xml.readyState);
+			// xml.onload = function () {
+			// 	if (xml.status === 200) {
+			// 		// console.log("ready: ", xml.readyState);
+			// 		resolve(xml.responseText);
+			// 	} else {
+			// 		reject("NEKI ERROR");
+			// 	}
+			// };
 
 			xml.send(sendData);
 		});

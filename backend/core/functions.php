@@ -9,7 +9,6 @@ function isLogged(){
 }
 // REGISTER USER
 function registerUser($name, $email, $password){
-
     global $pdo;
     if($email){
     $stmt= $pdo->prepare("SELECT * FROM  users WHERE email =?");
@@ -22,8 +21,7 @@ function registerUser($name, $email, $password){
         }else{
         $stmt = $pdo -> prepare("INSERT INTO users (name, email, password) VALUES(?, ?, ?)");
         $stmt -> execute([$name, $email, $password]);
-        echo "success";
-        
+        echo trim("success");
         }
 }    
 }
@@ -144,6 +142,25 @@ function changePassword($id, $oldPass, $password){
     }
 }
 
+function get_percentage($total, $number)
+{
+  if ( $total > 0 ) {
+   return round(($number * 100) / $total, 2);
+  } else {
+    return 0;
+  }
+}
+function message($percentage){
+    if($percentage<50){
+        return "Not so good";
+    }if($percentage>50 && $percentage < 70){
+        return "Good enough";
+    }if($percentage>70 && $percentage < 90){
+        return "Well done";
+    }if($percentage>90){
+        return "EXCELLENT ";
+    }
+}
 function dd($data){
     echo '<pre>';
     var_dump($data);

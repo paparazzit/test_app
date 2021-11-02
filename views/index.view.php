@@ -17,6 +17,9 @@ require 'inc/navbar.php';
         </div>
     </div>
 
+   
+
+
 <?php 
 require 'inc/bottom.php';
 ?>

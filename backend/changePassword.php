@@ -8,9 +8,9 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     $confirmPass = filter_var($_POST['confirmPassword'], FILTER_SANITIZE_STRING);
    
     if(changePassword($id, $oldPass, $password)){
-        echo ('ok');
+        echo 'ok';
     }else{
-        echo ('not ok');
+        echo 'not ok';
     }
     
 }else{

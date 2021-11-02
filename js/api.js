@@ -1,3 +1,4 @@
+// Home made validator form
 function FormValidator(formName, inputs, checkPassword) {
 	this.form = document.querySelector(`#${formName}`);
 	this.formErrors = {};
@@ -76,8 +77,6 @@ function FormValidator(formName, inputs, checkPassword) {
 }
 
 // PROMISES
-
-// MISLIM DA SE PROBLEM NALAZI OVDE KOD POGRESNOG HANDLOVANJA ERRORA odnosno rejecta
 class DB {
 	static getAll(method, url, sendData) {
 		let data = new Promise(function (resolve, reject) {
@@ -89,7 +88,7 @@ class DB {
 					if (xml.status === 200) {
 						resolve(JSON.parse(xml.responseText));
 					} else {
-						reject(xml);
+						reject("NEKI ERROR");
 					}
 				}
 			};
@@ -114,10 +113,11 @@ class DB {
 			xml.onreadystatechange = function () {
 				if (xml.readyState === 4) {
 					if (xml.status === 200) {
-						// console.log(xml.responseText);
+						console.log(xml.responseText);
 						resolve(xml.responseText);
 					} else {
-						reject(xml);
+						console.log(xml.responseText);
+						reject("NEKI ERROR");
 					}
 				}
 			};

@@ -21,6 +21,29 @@ if (registerBtn) {
 	}
 }
 
+let regNotification = document.querySelector("#regNotification");
+
+function registerUser(sendData) {
+	DB.getRaw("POST", "backend/registerUser.php", sendData)
+		.then(function (resolve) {
+			regNotification.innerText = "";
+			if (resolve.trim() === "success") {
+				console.log(resolve);
+				regNotification.innerHTML = `<p> Uspeli ste da se registujete. Sada treba da se ulogujete na <a href="login.php">Login stranici</a>`;
+			} else {
+				regNotification.innerHTML = `Registracija nije uspela: ${resolve} Verovatno treba jaca lozinka`;
+			}
+		})
+		.catch(function (reject) {
+			regNotification.innerText = "";
+			if (reject) {
+				regNotification.innerHTML = `Registracija nije uspela: ${reject}`;
+			}
+			console.log(reject, "Neuspesno");
+		});
+}
+
+// LOGIN
 let loginBtn = document.querySelector("#loginBtn");
 if (loginBtn) {
 	let loginForm = new FormValidator("loginUser", ["email", "password"], false);
@@ -40,30 +63,6 @@ if (loginBtn) {
 }
 
 // Promise handlers
-let regNotification = document.querySelector("#regNotification");
-
-function registerUser(sendData) {
-	DB.getRaw("POST", "backend/registerUser.php", sendData)
-		.then(function (resolve) {
-			regNotification.innerText = "";
-			if (resolve.trim() === "success") {
-				console.log(resolve);
-				regNotification.innerHTML = `<p> Uspeli ste da se registujete. Sada treba da se ulogujete na <a href="login.php">Login stranici</a>`;
-			} else {
-				regNotification.innerHTML = `Registracija nije uspela: ${resolve}`;
-				console.log("nije uspelo");
-			}
-		})
-		.catch(function (reject) {
-			regNotification.innerText = "";
-			if (reject) {
-				regNotification.innerHTML = `Registracija nije uspela: ${reject}`;
-			}
-			console.log(reject, "Neuspesno");
-		});
-}
-
-// PROBELM MISLIM DA SE PROBELM NALAZI OVDE U POGRESNOM HANDLOVANJU ERRORA
 function loginUser(sendData) {
 	DB.getAll("POST", "backend/loginUser.php", sendData)
 		.then(function (resolve) {
@@ -88,6 +87,7 @@ if (deleteUserBtns) {
 	});
 }
 
+// DELETE USER
 function deleteUser(e) {
 	e.preventDefault();
 	let deleteConf = confirm("Are you shure you want to delete user");
@@ -115,6 +115,7 @@ if (editUserBtns) {
 	});
 }
 
+// SPREMANJE TABELE ZA EDITOVANJE USERA SA ADMIN DOZVOLOM
 function editUserSetup(e) {
 	let userId = document.querySelector('input[name="id"]');
 	let userName = document.querySelector('input[name="name"]');
@@ -162,6 +163,7 @@ if (updateUserBtn) {
 	updateUserBtn.addEventListener("click", editModalForm);
 }
 
+// TABELA ZA EDITOVANJE USERA BS MODAL
 function editModalForm(e) {
 	e.preventDefault();
 	let role = document.querySelector('select[name="role"]');
@@ -181,6 +183,7 @@ function editModalForm(e) {
 	}
 }
 
+// SNIMANJE IZMENA ZA USERA
 function updateUser(sendData) {
 	DB.getAll("POST", "backend/updateUser.php", sendData)
 		.then(function (resolve) {
@@ -312,7 +315,8 @@ function changeUserPassword(sendData) {
 	DB.getRaw("POST", "backend/changePassword.php", sendData)
 		.then(function (response) {
 			notification.innerText = "";
-			if (response === "ok") {
+			console.log(response);
+			if (response.trim() === "ok") {
 				changePassBtn.className = "btn btn-success";
 				notification.innerText = "Password Changed";
 			} else {
@@ -324,7 +328,3 @@ function changeUserPassword(sendData) {
 			console.log(reject);
 		});
 }
-
-// TESTOVI VIEW
-
-// index
